@@ -1,0 +1,6 @@
+*.pyc
+*.tmx
+*.txt
+.DS_Store
+.vscode/
+env/
