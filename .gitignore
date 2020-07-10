@@ -2,5 +2,5 @@
 *.tmx
 *.txt
 .DS_Store
-.vscode/
-env/
+.vscode
+env
