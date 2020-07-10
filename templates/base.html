@@ -1,0 +1,90 @@
+{% load i18n %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Meta tags -->
+        <meta charset="utf-8">
+        <meta name="description" content="Jon Lee Personal Site">
+        <meta name="author" content="Jon Lee">
+        <!-- Site title -->
+        <title>Jon Lee</title>
+        <!-- Responsive resizing -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap styling -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+
+        <!-- Navigation bar -->
+
+        <nav class="navbar navbar-light navbar-expand-md justify-content-md-center justify-content-start" style="background-color: #F7F7F9; font-size: 110%" >
+
+            <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar -->
+            <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="collapsingNavbar2">
+
+                <!-- Navbar links -->
+                <ul class="navbar-nav mx-auto text-md-center text-left">
+                    <li {% if request.resolver_match.url_name == 'home' %}class="nav-item active"{% endif %}>
+                        <a class="nav-link mx-2" href="{% url 'home' %}">{% trans "Home" %}</a>
+                    </li>
+                    <li {% if request.resolver_match.url_name == 'about' %}class="nav-item active"{% endif %}>
+                        <a class="nav-link mx-2" href="{% url 'about' %}">{% trans "About" %}</a>
+                    </li>
+                    <li {% if request.resolver_match.url_name == 'translation' %}class="nav-item active"{% endif %}>
+                        <a class="nav-link mx-2" href="{% url 'translation' %}">{% trans "Translation" %}</a>
+                    </li>
+                    <li {% if request.resolver_match.url_name == 'coding' %}class="nav-item active"{% endif %}>
+                        <a class="nav-link mx-2" href="{% url 'coding' %}">{% trans "Coding" %}</a>
+                    </li>
+                    <li {% if request.resolver_match.url_name == 'blog' %}class="nav-item active"{% endif %}>
+                        <a class="nav-link mx-2" href="{% url 'blog' %}">{% trans "Blog" %}</a>
+                    </li>
+                </ul>
+
+                <!-- Language button -->
+
+                {% get_current_language as LANGUAGE_CODE %}
+                {% ifequal LANGUAGE_CODE 'en' %}
+                    <form action="{% url 'set_language' %}" method="post" id="form_{{ 'ja' }}" >
+                    {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}" />
+                        <input name="language" type="hidden" value="{{ 'ja' }}" />
+                    </form>
+                    <button class="btn btn-sm btn-outline-primary" type="submit" form="form_{{ 'ja' }}" value="Submit">日本語</button>
+                {% else %}
+                    <form action="{% url 'set_language' %}" method="post" id="form_{{ 'en' }}" >
+                    {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}" />
+                        <input name="language" type="hidden" value="{{ 'en' }}" />
+                    </form>
+                    <button class="btn btn-sm btn-outline-primary" type="submit" form="form_{{ 'en' }}" value="Submit">English</button>
+                {% endifequal %}
+
+            </div>
+        </nav>
+
+        <!-- Main body structure -->
+
+        <div class="container ">
+            <div class="row">
+                <div class="col-2 "></div>
+                    <div class="col-8 py-4 ">
+                        {% block content %}
+                        {% endblock content %}
+                    </div>
+                <div class="col-2 "></div>
+            </div>
+        </div>
+
+    <!-- JavaScript required for Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>
