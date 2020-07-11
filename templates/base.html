@@ -47,7 +47,9 @@
                     </li>
                 </ul>
 
-                <!-- Language button -->
+                <!-- Language switching button -->
+
+                <!-- One button approach -->
 
                 {% get_current_language as LANGUAGE_CODE %}
                 {% ifequal LANGUAGE_CODE 'en' %}
@@ -65,12 +67,39 @@
                     </form>
                     <button class="btn btn-sm btn-outline-primary" type="submit" form="form_{{ 'en' }}" value="Submit">English</button>
                 {% endifequal %}
+                    
+
+                <!-- Two button approach -->
+
+                <!--
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                <div class="btn-group btn-group-toggle">
+                    <form action="{% url 'set_language' %}" method="post" id="form_{{ language.code }}" style="display:inline!important;">
+                    {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}" />
+                        <input name="language" type="hidden" value="{{ language.code }}" />
+                    </form>
+                    <button class="btn btn-sm btn-outline-primary" type="submit" form="form_{{ language.code }}" value="Submit">{{ language.name_local }}</button>
+                </div>
+                {% endfor %}
+
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> Radio
+                    </label>
+                </div>
+                -->
 
             </div>
         </nav>
 
-        <!-- Main body structure -->
-
+        <!-- Main body structure: three columns with a 2-8-2 layout -->
         <div class="container ">
             <div class="row">
                 <div class="col-2 "></div>
