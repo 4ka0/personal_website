@@ -1,4 +1,3 @@
-
 from django.views.generic import TemplateView
 from django.shortcuts import render
 
@@ -17,16 +16,3 @@ class CodingPageView(TemplateView):
 
 class BlogPageView(TemplateView):
     template_name = 'blog.html'
-
-def set_language(request, current_lang_code):
-    '''
-    Function to set the display language, selected by the user.
-    '''
-    if current_lang_code == "en":
-        new_lang_code = "ja"
-        new_lang = "Japanese"
-    else:
-        new_lang_code = "en"
-        new_lang = "English"
-    return render(request, 'home.html', { 'new_lang_code': new_lang_code },
-                                        { 'new_lang': new_lang })
