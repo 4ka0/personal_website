@@ -3,7 +3,7 @@
 {% load language_selector %}
 
 <!doctype html>
-<html lang="en">
+<html lang="en" style="background-color: #F8F9FA">
     <head>
         <!-- Meta tags -->
         <meta charset="utf-8">
@@ -20,7 +20,11 @@
 
         <!-- Navigation bar -->
 
+        <!--
         <nav class="navbar navbar-light navbar-expand-md justify-content-md-center justify-content-start" style="background-color: #F7F7F9; font-size: 110%" >
+        -->
+        <nav class="navbar navbar-expand-md justify-content-md-center justify-content-start navbar-light bg-light" style="font-size: 110%" >
+            <a class="navbar-brand" href="{% url 'home' %}">Jon Lee</a>
 
             <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar2">
                 <span class="navbar-toggler-icon"></span>
@@ -31,9 +35,11 @@
 
                 <!-- Navbar links -->
                 <ul class="navbar-nav mx-auto text-md-center text-left">
+                    <!--
                     <li {% if request.resolver_match.url_name == 'home' %}class="nav-item active"{% endif %}>
                         <a class="nav-link mx-2" href="{% url 'home' %}">{% trans "Home" %}</a>
                     </li>
+                    -->
                     <li {% if request.resolver_match.url_name == 'about' %}class="nav-item active"{% endif %}>
                         <a class="nav-link mx-2" href="{% url 'about' %}">{% trans "About" %}</a>
                     </li>
@@ -61,14 +67,14 @@
         </nav>
 
         <!-- Main body structure: three columns with a 2-8-2 layout -->
-        <div class="container ">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-2 "></div>
-                    <div class="col-8 py-4 ">
+                <div class="col-2 bg-light"></div>
+                    <div class="col-8 py-4 bg-light">
                         {% block content %}
                         {% endblock content %}
                     </div>
-                <div class="col-2 "></div>
+                <div class="col-2 bg-light"></div>
             </div>
         </div>
 
