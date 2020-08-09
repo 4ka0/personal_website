@@ -3,7 +3,7 @@
 {% load language_selector %}
 
 <!doctype html>
-<html lang="en" style="background-color: #F8F9FA">
+<html lang="en">
     <head>
         <!-- Meta tags -->
         <meta charset="utf-8">
@@ -18,65 +18,64 @@
     </head>
     <body>
 
-        <!-- Navigation bar -->
-
-        <!--
-        <nav class="navbar navbar-light navbar-expand-md justify-content-md-center justify-content-start" style="background-color: #F7F7F9; font-size: 110%" >
-        -->
-        <nav class="navbar navbar-light bg-light navbar-expand-md justify-content-md-center justify-content-start" style="font-size: 110%" >
-            <a class="navbar-brand" href="{% url 'home' %}">Jon Lee</a>
-
-            <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar2">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Navbar -->
-            <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="collapsingNavbar2">
-
-                <!-- Navbar links -->
-                <ul class="navbar-nav mx-auto text-md-center text-left">
-                    <!--
-                    <li {% if request.resolver_match.url_name == 'home' %}class="nav-item active"{% endif %}>
-                        <a class="nav-link mx-2" href="{% url 'home' %}">{% trans "Home" %}</a>
-                    </li>
-                    -->
-                    <li {% if request.resolver_match.url_name == 'about' %}class="nav-item active"{% endif %}>
-                        <a class="nav-link mx-2" href="{% url 'about' %}">{% trans "About" %}</a>
-                    </li>
-                    <li {% if request.resolver_match.url_name == 'translation' %}class="nav-item active"{% endif %}>
-                        <a class="nav-link mx-2" href="{% url 'translation' %}">{% trans "Translation" %}</a>
-                    </li>
-                    <li {% if request.resolver_match.url_name == 'coding' %}class="nav-item active"{% endif %}>
-                        <a class="nav-link mx-2" href="{% url 'coding' %}">{% trans "Coding" %}</a>
-                    </li>
-                    <li {% if request.resolver_match.url_name == 'blog' %}class="nav-item active"{% endif %}>
-                        <a class="nav-link mx-2" href="{% url 'blog' %}">{% trans "Blog" %}</a>
-                    </li>
-                </ul>
-
-                <!-- Language switching button -->
-                {% get_current_language as LANGUAGE_CODE %}
-                <form action="{% url 'set_language' %}" method="post" id="form_{{ LANGUAGE_CODE|new_lang_code }}" >
-                {% csrf_token %}
-                    <input name="next" type="hidden" value="{{ redirect_to }}" />
-                    <input name="language" type="hidden" value="{{ LANGUAGE_CODE|new_lang_code }}" />
-                </form>
-                <button class="btn btn-sm btn-outline-primary" type="submit" form="form_{{ LANGUAGE_CODE|new_lang_code }}" value="Submit">{{ LANGUAGE_CODE|new_lang_name }}</button>
-
-            </div>
-        </nav>
-
-        <!-- Main body structure: three columns with a 2-8-2 layout -->
         <div class="container-fluid">
+
             <div class="row">
-                <div class="col-2 bg-light"></div>
-                    <div class="col-8 py-4 bg-light">
-                        {% block content %}
-                        {% endblock content %}
-                    </div>
-                <div class="col-2 bg-light"></div>
-            </div>
-        </div>
+
+                <!-- Side navbar -->
+                <div class="col-2 py-5 bg-white text-center">
+
+                        <!-- Page links -->
+                        <ul class="navbar-nav">
+
+                            <h5>
+                                <li {% if request.resolver_match.url_name == 'home' %}class="nav-item active"{% endif %}>
+                                    <a class="nav-link mx-2" href="{% url 'home' %}">{% trans "Home" %}</a>
+                                </li>
+                            </h5>
+                            <h5>
+                                <li {% if request.resolver_match.url_name == 'about' %}class="nav-item active"{% endif %}>
+                                    <a class="nav-link mx-2" href="{% url 'about' %}">{% trans "About" %}</a>
+                                </li>
+                            </h5>
+                            <h5>
+                                <li {% if request.resolver_match.url_name == 'translation' %}class="nav-item active"{% endif %}>
+                                    <a class="nav-link mx-2" href="{% url 'translation' %}">{% trans "Translation" %}</a>
+                                </li>
+                            </h5>
+                            <h5>
+                                <li {% if request.resolver_match.url_name == 'coding' %}class="nav-item active"{% endif %}>
+                                    <a class="nav-link mx-2" href="{% url 'coding' %}">{% trans "Coding" %}</a>
+                                </li>
+                            </h5>
+                            <h5>
+                                <li {% if request.resolver_match.url_name == 'blog' %}class="nav-item active"{% endif %}>
+                                    <a class="nav-link mx-2" href="{% url 'blog' %}">{% trans "Blog" %}</a>
+                                </li>
+                            </h5>
+                        </ul>
+
+                        <div class="pt-3">
+                            <!-- Language switching button -->
+                            {% get_current_language as LANGUAGE_CODE %}
+                            <form action="{% url 'set_language' %}" method="post" id="form_{{ LANGUAGE_CODE|new_lang_code }}" >
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value="{{ redirect_to }}" />
+                                <input name="language" type="hidden" value="{{ LANGUAGE_CODE|new_lang_code }}" />
+                            </form>
+                            <button class="btn btn-outline-primary" type="submit" form="form_{{ LANGUAGE_CODE|new_lang_code }}" value="Submit">{{ LANGUAGE_CODE|new_lang_name }}</button>
+                        </div>
+
+                </div> <!-- Side navbar end -->
+
+                <!-- Main body structure: three columns with a 2-8-2 layout -->
+                <div class="col-8 py-5 bg-white">
+                    {% block content %}
+                    {% endblock content %}
+                </div>
+
+            </div> <!-- Row end -->
+        </div> <!-- Container end -->
 
     <!-- JavaScript required for Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
