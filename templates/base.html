@@ -15,6 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap styling -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static "pages/custom.css" %}">
     </head>
     <body>
 
@@ -22,14 +23,13 @@
 
             <div class="row">
 
-                <!-- Side navbar -->
-                <div class="col-2 py-5 bg-white text-center">
+                <!-- Side navigation bar -->
+                <div class="sidebar">
 
                         <!-- Page links -->
                         <ul class="navbar-nav">
 
                             <!-- Profile image -->
-
                             <img class="image-fluid mt-3 mb-4 rounded-circle mx-auto" src="{% static "pages/profile.jpeg" %}" alt="Profile image" width="160px" height="160px">
 
                             <h5>
@@ -59,8 +59,8 @@
                             </h5>
                         </ul>
 
+                        <!-- Language switching button -->
                         <div class="pt-3">
-                            <!-- Language switching button -->
                             {% get_current_language as LANGUAGE_CODE %}
                             <form action="{% url 'set_language' %}" method="post" id="form_{{ LANGUAGE_CODE|new_lang_code }}" >
                                 {% csrf_token %}
@@ -70,7 +70,14 @@
                             <button class="btn btn-outline-primary" type="submit" form="form_{{ LANGUAGE_CODE|new_lang_code }}" value="Submit">{{ LANGUAGE_CODE|new_lang_name }}</button>
                         </div>
 
-                </div> <!-- Side navbar end -->
+                        <!-- Social media links-->
+                        <div class="py-4">
+                            <img class="image-fluid mx-auto" src="{% static "pages/github.svg" %}" alt="Profile image" width="30px" height="30px">
+                            <img class="image-fluid mx-auto" src="{% static "pages/linkedin-in.svg" %}" alt="Profile image" width="30px" height="30px">
+                            <img class="image-fluid mx-auto" src="{% static "pages/twitter.svg" %}" alt="Profile image" width="30px" height="30px">
+                        </div>
+
+                </div> <!-- Sidebar end -->
 
                 <!-- Main body structure: three columns with a 2-8-2 layout -->
                 <div class="col-8 py-5 bg-white">
