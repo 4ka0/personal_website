@@ -28,8 +28,9 @@
                         <!-- Page links -->
                         <ul class="navbar-nav">
 
-                            <!-- !!! FIX IMAGE LINK !!! -->
-                            <img class="profile-image mb-3 rounded-circle mx-auto" src="../static/img/profile.jpeg" alt="Profile image" >
+                            <!-- Profile image -->
+
+                            <img class="image-fluid mt-3 mb-4 rounded-circle mx-auto" src="{% static "pages/profile.jpeg" %}" alt="Profile image" width="160px" height="160px">
 
                             <h5>
                                 <li {% if request.resolver_match.url_name == 'home' %}class="nav-item active"{% endif %}>
