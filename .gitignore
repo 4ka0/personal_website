@@ -3,5 +3,5 @@
 *.txt
 .DS_Store
 .vscode/
-env/
+venv/
 db.sqlite3
